@@ -43,9 +43,20 @@ function loop() {
           let color = randomRGB();
           arrayPilotes[i] = new Pilota(x, y, random(-5, 5), random(-5, 5), color, mida);
       }
+     
+  }
 
-      arrayPilotes[i].mou(canvas.width, canvas.height);
-      arrayPilotes[i].dibuixa(ctx);
+  for (let j = 0; j < arrayPilotes.length; j++){
+    for (let k = 0; k < arrayPilotes.length; k++){
+      if ( j!= k){
+        if (colisionaPilota(arrayPilotes[j],arrayPilotes[k])){
+           arrayPilotes[j].color = randomRGB();
+            arrayPilotes[k].color = randomRGB();
+        }
+      }
+    }
+    arrayPilotes[j].mou(canvas.width, canvas.height);
+    arrayPilotes[j].dibuixa(ctx);
   }
 
   requestAnimationFrame(loop);
@@ -54,10 +65,12 @@ function loop() {
 
 loop();
 
-function colisionaPIlota () {
-  for (let i= 0; i < arrayPilotes.length; i++){
-    for (let j = i +1 <arrayPilotes.length; j++){
-      
-    }
-  }
+// funció booleana que et diu si les pilotes han colisionat o no 
+function colisionaPilota(pilota1, pilota2) {
+  let distanciaX = pilota1.x - pilota2.x;
+  let distanciaY = pilota1.y - pilota2.y;
+  let distanciaEuclidiana = Math.sqrt(distanciaX ** 2 + distanciaY ** 2);
+  let distanciaMides = pilota1.mida + pilota2.mida;
+
+  return distanciaEuclidiana < distanciaMides;
 }
