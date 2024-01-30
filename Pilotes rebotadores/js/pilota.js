@@ -21,6 +21,7 @@ export class Pilota {
     si la posició y menys la mida de la Pilota és menor que 0 ha de rebotar
     a la posició x se li suma la velocitatx a la posició y se li suma la velocitaty */
     
+    //En cada frame
     mou (width,height){
         if ((this.x + this.mida) > width || this.x - this.mida <0){
             this.velX =- this.velX;
@@ -32,6 +33,18 @@ export class Pilota {
         //Es fa si o si 
         this.x += this.velX;
         this.y += this.velY;
+    }
+
+    //Necessita un altre element per saber si s'ha d'executar o no 
+    checkCollision(altrePilota){ 
+        let distanciaX = altrePilota.x - this.x;
+        let distanciaY = altrePilota.y - this.y;
+        if (Math.abs(distanciaX)> Math.abs(distanciaY)){
+            this.velX =- this.velX;
+        } else {
+            this.velY =- this.velY;
+        }
+          
     }
 
     

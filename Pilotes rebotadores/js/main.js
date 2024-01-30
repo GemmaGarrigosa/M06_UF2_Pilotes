@@ -50,6 +50,8 @@ function loop() {
     for (let k = 0; k < arrayPilotes.length; k++){
       if ( j!= k){
         if (colisionaPilota(arrayPilotes[j],arrayPilotes[k])){
+          arrayPilotes[j].checkCollision(arrayPilotes[k]);
+          arrayPilotes[k].checkCollision(arrayPilotes[j]);
            arrayPilotes[j].color = randomRGB();
             arrayPilotes[k].color = randomRGB();
         }
